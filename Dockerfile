@@ -27,9 +27,9 @@ RUN apk add --no-cache \
     protoc \
     protobuf-dev \
     rm -rf /root/.cache
-RUN DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker} \
-    mkdir -p $DOCKER_CONFIG/cli-plugins \
-    curl -SL https://github.com/docker/compose/releases/download/v2.20.0/docker-compose-linux-x86_64 -o $DOCKER_CONFIG/cli-plugins/docker-compose
+
+RUN curl -SL https://github.com/docker/compose/releases/download/v2.20.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+
 # Include functions to start/stop docker daemon
 COPY docker-lib.sh /docker-lib.sh
 COPY entrypoint.sh /entrypoint.sh
