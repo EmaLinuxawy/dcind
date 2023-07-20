@@ -1,9 +1,6 @@
 # Inspired by https://github.com/mumoshu/dcind
 FROM alpine:3.18.2
-LABEL maintainer="Dmitry Matrosov <amidos@amidos.me>"
 LABEL maintainer="Ibrahim Soliman <Emalinuxawy@gmail.com>"
-
-ENV DOCKER_VERSION=23.0.6
 
 # Install Docker and Docker Compose
 RUN apk add --no-cache \
@@ -30,7 +27,9 @@ RUN apk add --no-cache \
     protoc \
     protobuf-dev \
     rm -rf /root/.cache
-
+RUN DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker} \
+    mkdir -p $DOCKER_CONFIG/cli-plugins \
+    curl -SL https://github.com/docker/compose/releases/download/v2.20.0/docker-compose-linux-x86_64 -o $DOCKER_CONFIG/cli-plugins/docker-compose
 # Include functions to start/stop docker daemon
 COPY docker-lib.sh /docker-lib.sh
 COPY entrypoint.sh /entrypoint.sh
