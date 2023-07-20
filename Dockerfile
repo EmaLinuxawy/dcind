@@ -22,11 +22,13 @@ RUN apk add --no-cache \
     openssl-dev \
     zlib-dev \
     util-linux \
-    device-mapper
-
-RUN curl https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz | tar zx && \
-    mv /docker/* /bin/ && \
-    chmod +x /bin/docker* && \
+    device-mapper \
+    clang \
+    docker \
+    file \
+    findutils \
+    protoc \
+    protobuf-dev \
     rm -rf /root/.cache
 
 # Include functions to start/stop docker daemon
