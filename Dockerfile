@@ -28,7 +28,8 @@ RUN apk add --no-cache \
     protobuf-dev \
     rm -rf /root/.cache
 
-RUN curl -SL https://github.com/docker/compose/releases/download/v2.20.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+RUN curl -SL https://github.com/docker/compose/releases/download/v2.20.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose \
+    chmod +x /usr/local/bin/docker-compose
 
 # Include functions to start/stop docker daemon
 COPY docker-lib.sh /docker-lib.sh
